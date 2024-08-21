@@ -1,5 +1,7 @@
 package com.aurickcode.dao;
 
+import com.aurickcode.entity.FileEntity;
+
 public interface FileSharingDAO {
-    String uploadFile();
+    void uploadFile(FileEntity entity);
 }
