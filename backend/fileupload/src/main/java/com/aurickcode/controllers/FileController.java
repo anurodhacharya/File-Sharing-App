@@ -1,12 +1,13 @@
 package com.aurickcode.controllers;
 
+import com.aurickcode.dto.FileDownloadDetails;
 import com.aurickcode.service.FileService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 
 @RestController
@@ -19,8 +20,13 @@ public class FileController {
     }
 
     @PostMapping("upload")
-    public URL fileupload(@RequestParam("file") MultipartFile file) {
-        URL downloadLink = fileService.fileupload(file);
+    public String fileupload(@RequestParam("file") MultipartFile file) {
+        String downloadLink = fileService.fileupload(file);
         return downloadLink;
+    }
+
+    @GetMapping("download")
+    public ResponseEntity<InputStreamResource> filedownload(@RequestBody FileDownloadDetails fileDownloadDetails) throws FileNotFoundException {
+        return fileService.filedownload(fileDownloadDetails);
     }
 }

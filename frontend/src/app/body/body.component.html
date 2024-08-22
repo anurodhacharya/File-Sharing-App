@@ -1,0 +1,29 @@
+<div class="row justify-content-center">
+    <div class="col-md-3">
+        <div class="row">
+            <label for="formFileLg" class="form-label fs-3">Upload a file</label>
+            <input class="form-control form-control-lg" id="formFileLg" type="file">
+        </div>
+        <div class="row" *ngIf="isPasswordInputVisible">
+            <span class="input-group-text" id="basic-addon1">Enter password</span>
+            <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+        </div>
+        <div class="row" *ngIf="isTimerInputVisible">
+            <span class="input-group-text" id="basic-addon1">Enter Timer</span>
+            <input type="text" class="form-control" placeholder="Timer" aria-label="Password" aria-describedby="basic-addon1">
+        </div>
+    </div>
+    <div class="col-md-3 ms-2">
+        <div class="row">
+            <p class="fs-3">Choose any option</p>
+        </div>
+        <div class="row mb-2">
+            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" (click)="changePasswordInputVisibility()">
+            <label class="btn btn-outline-primary" for="btncheck1">Password</label>
+        </div>
+        <div class="row">
+            <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" (click)="changeTimerInputVisibility()">
+            <label class="btn btn-outline-primary" for="btncheck2">Timer</label>
+        </div>
+    </div>
+  </div>

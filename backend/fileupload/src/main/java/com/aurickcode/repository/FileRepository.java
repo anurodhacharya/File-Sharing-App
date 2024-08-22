@@ -4,6 +4,8 @@ import com.aurickcode.dao.FileSharingDAO;
 import com.aurickcode.entity.FileEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class FileRepository implements FileSharingDAO {
 
@@ -14,7 +16,12 @@ public class FileRepository implements FileSharingDAO {
     }
 
     @Override
-    public void uploadFile(FileEntity entity) {
-        fileAccessJpa.save(entity);
+    public FileEntity uploadFile(FileEntity entity) {
+        return fileAccessJpa.save(entity);
+    }
+
+    @Override
+    public Optional<FileEntity> downloadFile(String fileId) {
+        return fileAccessJpa.findById(fileId);
     }
 }
