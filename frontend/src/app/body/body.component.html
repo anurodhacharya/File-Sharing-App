@@ -1,29 +1,93 @@
+<form [formGroup]="signupForm" (ngSubmit)="submitForm()">
 <div class="row justify-content-center">
     <div class="col-md-3">
-        <div class="row">
-            <label for="formFileLg" class="form-label fs-3">Upload a file</label>
-            <input class="form-control form-control-lg" id="formFileLg" type="file">
-        </div>
-        <div class="row" *ngIf="isPasswordInputVisible">
-            <span class="input-group-text" id="basic-addon1">Enter password</span>
-            <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-        </div>
-        <div class="row" *ngIf="isTimerInputVisible">
-            <span class="input-group-text" id="basic-addon1">Enter Timer</span>
-            <input type="text" class="form-control" placeholder="Timer" aria-label="Password" aria-describedby="basic-addon1">
+        <div class="card text-bg-light mb-3" style="max-width: 22rem;">
+            <!-- <div class="card-header">File upload options</div> -->
+            <div class="card-body">
+              <h5 class="card-title">Upload a file</h5>
+              <div class="row">
+                <!-- <ng-content></ng-content> -->
+                <input class="form-control form-control" id="formFileLg" type="file" (change)="onFileSelect($event)">
+            </div>
+            <div class="row" *ngIf="isPasswordInputVisible">
+                <span class="input-group-text" id="basic-addon1">Enter password</span>
+                <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" formControlName="password">
+            </div>
+            <div class="row" *ngIf="isTimerInputVisible">
+                <span class="input-group-text" id="basic-addon1">Enter Timer</span>
+                <input type="text" class="form-control" placeholder="Timer" aria-label="Password" aria-describedby="basic-addon1" formControlName="timer">
+            </div>
+            <div class="row mt-3">
+                <button class="btn btn-primary md-3">Submit</button>
+            </div>
+            </div>
+          </div>
+        
+        <div class="row mt-2" *ngIf="isSubmitSuccess != null">
+            <div [ngClass]="{
+                'alert': true,
+                'alert-success': isSubmitSuccess,
+                'alert-danger': !isSubmitSuccess,
+                }" 
+            role="alert">
+                File upload Success
+              </div>
+            
         </div>
     </div>
     <div class="col-md-3 ms-2">
-        <div class="row">
-            <p class="fs-3">Choose any option</p>
+        <div class="card text-bg-light mb-3" style="max-width: 22rem;">
+            <div class="card-header">File upload options</div>
+            <div class="card-body">
+              <h5 class="card-title">Click to choose an option</h5>
+              <div class="row mb-2">
+                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" (click)="changePasswordInputVisibility()">
+                <label class="btn btn-outline-success" for="btncheck1">Password</label>
+            </div>
+            <div class="row">
+                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" (click)="changeTimerInputVisibility()">
+                <label class="btn btn-outline-success" for="btncheck2">Timer</label>
+            </div>
+            </div>
+          </div>
+        <!-- <div class="row">
+            <p class="fs-3">Click to choose an option</p>
         </div>
         <div class="row mb-2">
             <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" (click)="changePasswordInputVisibility()">
-            <label class="btn btn-outline-primary" for="btncheck1">Password</label>
+            <label class="btn btn-outline-success" for="btncheck1">Password</label>
         </div>
         <div class="row">
             <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" (click)="changeTimerInputVisibility()">
-            <label class="btn btn-outline-primary" for="btncheck2">Timer</label>
+            <label class="btn btn-outline-success" for="btncheck2">Timer</label>
+        </div> -->
+    </div>
+</div>
+</form>
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button> -->
+  
+  <!-- Modal -->
+  <!-- <div #myModal class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+            <input #myInput type="text" class="form-control" placeholder="Focus me when modal opens">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
     </div>
   </div>
+   -->

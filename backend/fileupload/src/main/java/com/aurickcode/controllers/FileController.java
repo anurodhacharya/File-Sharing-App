@@ -20,9 +20,13 @@ public class FileController {
     }
 
     @PostMapping("upload")
-    public String fileupload(@RequestParam("file") MultipartFile file) {
+    public String fileupload(@RequestParam("file") MultipartFile file,
+                             @RequestParam("password") String password,
+                            @RequestParam("timer") String timer)
+    {
         String downloadLink = fileService.fileupload(file);
-        return downloadLink;
+//        return downloadLink;
+        return "Posted";
     }
 
     @GetMapping("download")

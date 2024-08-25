@@ -5,18 +5,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BodyComponent } from './body/body.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FileSharingService } from './filesharingservice';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { FileComponent } from './body/file/file.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    BodyComponent
+    BodyComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FileSharingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
