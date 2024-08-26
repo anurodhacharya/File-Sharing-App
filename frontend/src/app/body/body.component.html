@@ -2,12 +2,36 @@
 <div class="row justify-content-center mt-3">
     <div class="col-md-3">
         <div class="card text-bg-light mb-3" style="max-width: 22rem;">
+            <div class="card-header">Upload type</div>
+            <div class="card-body">
+              <h5 class="card-title">Click to choose an option</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked (click)="changeUploadType()">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  File Upload
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" (click)="changeUploadType()">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Text Input
+                </label>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-light mb-3" style="max-width: 22rem;">
             <!-- <div class="card-header">File upload options</div> -->
             <div class="card-body">
               <h5 class="card-title">Upload a file</h5>
               <div class="row">
                 <!-- <ng-content></ng-content> -->
-                <input class="form-control form-control" id="formFileLg" type="file" (change)="onFileSelect($event)">
+                <input class="form-control form-control" *ngIf="fileUploadType" id="formFileLg" type="file" (change)="onFileSelect($event)">
+                <div class="form-floating" *ngIf="!fileUploadType">
+                    <textarea class="form-control" placeholder="Enter text here" id="floatingTextarea"></textarea>
+                    <label for="floatingTextarea">Text Input</label>
+                </div>
             </div>
             <div class="row" *ngIf="isPasswordInputVisible">
                 <span class="input-group-text" id="basic-addon1">Enter password</span>
@@ -18,7 +42,15 @@
             
             <div class="row" *ngIf="isTimerInputVisible">
                 <span class="input-group-text" id="basic-addon1">Enter Timer</span>
-                <input type="text" class="form-control" placeholder="Timer" aria-label="Password" aria-describedby="basic-addon1" formControlName="timer">
+                <div class="col">
+                    <input type="number" max="2" min="0" class="form-control" placeholder="Hour" aria-label="Password" aria-describedby="basic-addon1" formControlName="hour">
+                </div>
+                <div class="col">
+                    <input type="number" max="59" min="0" class="form-control" placeholder="Min" aria-label="Password" aria-describedby="basic-addon1" formControlName="min">
+                </div>
+                <div class="col">
+                    <input type="number" max="59" min="0" class="form-control" placeholder="Sec" aria-label="Password" aria-describedby="basic-addon1" formControlName="sec">
+                </div>
             </div>
             <div class="row mt-3">
                 <button class="btn btn-primary md-3" [ngClass]="{
@@ -26,18 +58,16 @@
                 }">Submit</button>
             </div>
             </div>
-          </div>
-        
-        <div class="row mt-1" *ngIf="isSubmitSuccess != null">
-            <div [ngClass]="{
-                'alert': true,
-                'alert-success': isSubmitSuccess,
-                'alert-danger': !isSubmitSuccess,
-                }" 
-            role="alert">
+        </div>
+        <div class="row mt-1" *ngIf="isSubmitSuccess">
+            <div class="alert alert-success"> 
                 File upload Success
-              </div>
-            
+            </div>
+        </div>
+        <div class="row mt-1" *ngIf="isSubmitSuccess != null && !isSubmitSuccess">
+            <div class="alert alert-danger">
+                File upload Failed
+            </div>    
         </div>
     </div>
     <div class="col-md-3 ms-2">
