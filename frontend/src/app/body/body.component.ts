@@ -15,16 +15,17 @@ export class BodyComponent implements OnInit {
   signupForm: FormGroup;
   selectedFile: File | null = null;
   isSubmitSuccess: boolean = null;
+  isFormValid: boolean = false;
+  isPasswordChosen: boolean = false;
+  isTimerChosen: boolean = false;
 
-  
   constructor(private fileSharingService: FileSharingService) {
-
   }
 
   ngOnInit(): void {
       this.signupForm = new FormGroup({
-        password: new FormControl(null, Validators.required),
-        timer: new FormControl(null, Validators.required)
+        password: new FormControl(null, Validators.minLength(5)),
+        timer: new FormControl(null)
       });
 
       this.fileSharingService.message.subscribe((message) => {
@@ -35,19 +36,19 @@ export class BodyComponent implements OnInit {
 
   changePasswordInputVisibility() {
     this.isPasswordInputVisible = !this.isPasswordInputVisible;
+    this.isFormValid = false;
   }
 
   changeTimerInputVisibility() {
     this.isTimerInputVisible = !this.isTimerInputVisible;
   }
 
-  
   onFileSelect(event: Event) {
     const input = event.target as HTMLInputElement;
     if(input.files && input.files.length> 0) {
       this.selectedFile = input.files[0];
     }
-    // console.log(this.selectedFile);
+    this.isFormValid = true;
   }
 
   submitForm() {
@@ -56,14 +57,14 @@ export class BodyComponent implements OnInit {
       formData.append('file', this.selectedFile);
       formData.append('password', this.signupForm.get('password')?.value);
       formData.append('timer', this.signupForm.get('timer')?.value);
-      // console.log(formData);
+      console.log(formData);
       this.fileSharingService.sendFile(formData)
       this.signupForm.reset();
       this.selectedFile = null;
     }
   }
 
-  isUploadSuccess(isSubmitSuccess: boolean) {
-    this.isSubmitSuccess = isSubmitSuccess;
+  optionalPasswordChecker() {
+    this.signupForm.valid == true ? this.isFormValid = true : this.isFormValid = false;
   }
 }

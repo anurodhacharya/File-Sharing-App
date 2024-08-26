@@ -8,15 +8,13 @@ import { BodyComponent } from './body/body.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileSharingService } from './filesharingservice';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
-import { FileComponent } from './body/file/file.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     BodyComponent,
-    FileComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

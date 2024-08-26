@@ -6,23 +6,18 @@ import { Subject } from "rxjs";
     providedIn: 'root',
 })
 export class FileSharingService {
-    private receivedFile: any = '';
-    isUploadSuccess: boolean = false;
-
     uploadInfo = new Subject<boolean>;
 
     message = this.uploadInfo.asObservable();
 
     constructor(private httpClient: HttpClient) {
-        this.httpClient = httpClient;
     }
-
 
     sendFile(file: any) {
         this.httpClient.post("http://localhost:8080/upload", file, { responseType: 'text' }).subscribe(
             {
-                next: () => {
-                    console.log("File has been sent");
+                next: (downloadLink) => {
+                    console.log("Message: ", downloadLink);
                     this.uploadInfo.next(true);
                 },
                 error: (error) => {
@@ -31,9 +26,5 @@ export class FileSharingService {
                 }
             }
         );
-    }
-
-    getFile() {
-
     }
 }

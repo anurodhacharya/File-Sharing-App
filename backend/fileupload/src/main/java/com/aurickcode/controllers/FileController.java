@@ -25,8 +25,8 @@ public class FileController {
                             @RequestParam("timer") String timer)
     {
         String downloadLink = fileService.fileupload(file);
-//        return downloadLink;
-        return "Posted";
+        return downloadLink;
+//        return "Posted";
     }
 
     @GetMapping("download")
