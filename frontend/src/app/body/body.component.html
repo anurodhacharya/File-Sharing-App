@@ -24,9 +24,9 @@
         <div class="card text-bg-light mb-3" style="max-width: 22rem;">
             <!-- <div class="card-header">File upload options</div> -->
             <div class="card-body">
-              <h5 class="card-title">Upload a file</h5>
+              <h5 class="card-title" *ngIf="fileUploadType">Upload a file</h5>
+              <h5 class="card-title" *ngIf="!fileUploadType">Enter text</h5>
               <div class="row">
-                <!-- <ng-content></ng-content> -->
                 <input class="form-control form-control" *ngIf="fileUploadType" id="formFileLg" type="file" (change)="onFileSelect($event)">
                 <div class="form-floating" *ngIf="!fileUploadType">
                     <textarea class="form-control" placeholder="Enter text here" id="floatingTextarea"></textarea>
