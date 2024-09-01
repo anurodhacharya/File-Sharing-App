@@ -8,6 +8,9 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.aurickcode.dao.FileSharingDAO;
 import com.aurickcode.dto.FileDownloadDetails;
 import com.aurickcode.entity.FileEntity;
+//import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,6 +30,9 @@ import java.util.UUID;
 public class FileService {
     private AmazonS3 amazonS3;
     private FileSharingDAO fileSharingDAO;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     public FileService(FileSharingDAO fileSharingDAO, AmazonS3 amazonS3) {
         this.fileSharingDAO = fileSharingDAO;
@@ -50,7 +56,9 @@ public class FileService {
                     s3Url
             );
             FileEntity fileEntity = fileSharingDAO.uploadFile(entity);
-            return "https://filesharingapp/" + id;
+            String downloadUrl = "https://filesharingapp/" + id;;
+            rabbitTemplate.convertAndSend("message_exchange", "message_routingKey", "File uploaded at: " + downloadUrl);
+            return downloadUrl;
         } catch (IOException e) {
             System.out.println("Error");
         }

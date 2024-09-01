@@ -1,0 +1,30 @@
+<form [formGroup]="signupForm">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+            <div class="card text-bg-light mb-3">
+                <!-- <div class="card-header">File upload options</div> -->
+                <div class="card-body">
+                  <h5 class="card-title">Enter Download Details</h5>
+                 
+                </div>
+            <label for="downloadUrl" class="form-label">Download URL</label>
+            <input type="text" class="form-control" id="downloadUrl" formControlName="downloadLink" aria-describedby="emailHelp">
+            <!-- <div id="emailHelp" class="form-text">Only share the url with person you trust.</div> -->
+
+            <label for="exampleInputEmail1" class="form-label">Password</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" formControlName="password" aria-describedby="emailHelp">
+            <!-- <div id="emailHelp" class="form-text">Only share the url with person you trust.</div> -->
+            <button type="submit" (click)="downloadFile()" class="btn btn-primary mt-3">Submit</button>
+
+            
+        </div>
+        <div class="alert alert-success mt-3" *ngIf="isFileDownloaded" role="alert">
+            File has been successfully downloaded!
+          </div>
+
+          <div class="alert alert-danger mt-3" *ngIf="isFileDownloaded == false" role="alert">
+            File download failed.
+          </div>
+    </div>
+    </div>
+</form>

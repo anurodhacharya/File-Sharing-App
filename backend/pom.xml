@@ -23,7 +23,9 @@
 	</developers>
     <modules>
         <module>fileupload</module>
-    </modules>
+        <module>notification</module>
+		<module>amqp</module>
+	</modules>
     <scm>
 		<connection/>
 		<developerConnection/>
@@ -53,6 +55,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream-test-binder</artifactId>

@@ -29,7 +29,7 @@ public class FileController {
 //        return "Posted";
     }
 
-    @GetMapping("download")
+    @PostMapping("download")
     public ResponseEntity<InputStreamResource> filedownload(@RequestBody FileDownloadDetails fileDownloadDetails) throws FileNotFoundException {
         return fileService.filedownload(fileDownloadDetails);
     }

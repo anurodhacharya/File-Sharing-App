@@ -64,6 +64,12 @@
                 File upload Success
             </div>
         </div>
+        <div class="row mt-1" *ngIf="downloadLink">
+          <div class="alert alert-info"> 
+            <p>Please use the following link to download the file</p>
+            <p><b>{{ downloadLink }}</b></p>
+          </div>
+      </div>
         <div class="row mt-1" *ngIf="isSubmitSuccess != null && !isSubmitSuccess">
             <div class="alert alert-danger">
                 File upload Failed

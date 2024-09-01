@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FileSharingService } from './filesharingservice';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { HomepageComponent } from './homepage/homepage.component';
+import { DownloadComponent } from './download/download.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     HeaderComponent,
     BodyComponent,
     HomepageComponent,
+    DownloadComponent,
     ],
   imports: [
     BrowserModule,

@@ -19,6 +19,7 @@ export class BodyComponent implements OnInit {
   isPasswordChosen: boolean = false;
   isTimerChosen: boolean = false;
   fileUploadType: boolean = true;
+  downloadLink: string = null;
 
   constructor(private fileSharingService: FileSharingService) {
   }
@@ -34,6 +35,10 @@ export class BodyComponent implements OnInit {
       this.fileSharingService.message.subscribe((message) => {
         this.isSubmitSuccess = message;
         console.log("Message: ", message)
+      })
+
+      this.fileSharingService.link.subscribe((downloadLink) => {
+        this.downloadLink = downloadLink;
       })
   }
 
@@ -64,6 +69,7 @@ export class BodyComponent implements OnInit {
 
       console.log("Total Seconds: ", totalSeconds);
 
+      formData.append('timer', totalSeconds)
       // formData.append('timer', this.signupForm.get('timer')?.value);
       console.log(formData);
       this.fileSharingService.sendFile(formData)
